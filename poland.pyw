@@ -46,7 +46,7 @@ except Exception as e:
 
 cows = []
 frames = []
-max_cows = 100
+max_cows = 110
 
 
 def load_frames(root):
