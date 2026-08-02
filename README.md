@@ -1,0 +1,26 @@
+# cows cows cows dancing cows in POLAND
+The most legendary annoying prank program ever! (probably not, just exaggerated)
+
+## What it does
+
+* Duplicates cows across your screen (up to 110)
+* annoys you
+
+## Disclaimer
+
+This project is made for educational and entertainment purposes only.
+
+This could be classified as **malware** (yes the bad programs computing teachers warn you about, *gasp*) 
+
+> Except instead of stealing your files, it steals your attention with dancing cows.
+
+Do not run this program on any computer that you do not own or have explicit permission to use.
+
+By using this program, you acknowledge that:
+
+- It is intentionally designed to be annoying.
+- It may create multiple windows and consume system resources.
+- You are responsible for running it on your own device.
+- The author is not responsible for any damage, data loss, or misuse of this program.
+
+Use at your own risk.
