@@ -13,7 +13,25 @@ The most legendary annoying prank program ever! (probably not, just exaggerated)
 * Polish-Cow-Virus is a prankware, **not** some super dangerous malware that steals your passwords.
 * If you're infected with it, run the following command in cmd prompt to temporarily stop it:
   
-> taskkill /F /IM python.exe & taskkill /F /IM pythonw.exe
+  > taskkill /F /IM python.exe & taskkill /F /IM pythonw.exe
+  
+* Running the command can also kill random python processes in crossfire.
+
+## How to get rid of it
+
+* Run the following command in cmd prompt to stop the currently running process:
+
+  > taskkill /F /IM python.exe & taskkill /F /IM pythonw.exe
+
+* Press the Windows Key (the one with four squares) and R (the letter R) and type exactly 'shell:startup'
+* Look for a .bat file with a bunch of stuff in it, for example: '9f4c7a2e8b1d43f6a0c92e7d5b3f18aa.bat'
+* Right click the .bat file and look inside, copy the Base64 (the long string) thats' after -EncodedCommand and open Windows Powershell.
+* Run the command: '[Text.Encoding]::Unicode.GetString([Convert]::FromBase64String("PASTE_BASE64_HERE"))'
+* After running, it should output some random path like: "C:\Users\YourName\AppData\Local\SomeFolder\abcdef1234567890.pyw"
+* Remove abcdef1234567890.pyw from the path (or whatever its named) to avoid running it by accident. So it would be: "C:\Users\YourName\AppData\Local\SomeFolder"
+* Then, press Windows and R and paste in the path (example: C:\Users\YourName\AppData\Local\SomeFolder).
+* Now, as you are in that folder, look for the program named 'abcdef1234567890.pyw' or whatever it is named and delete it.
+* If it has a .mp3 and .gif file with a huge string like the .pyw file delete them as well.
 
 ## Disclaimer
 
