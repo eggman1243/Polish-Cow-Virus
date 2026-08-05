@@ -6,6 +6,15 @@ The most legendary annoying prank program ever! (probably not, just exaggerated)
 * Duplicates cows across your screen (up to 110)
 * annoys you
 
+## Information
+
+* 'blockbattles.exe and 'installerpoopy.py' are the same thing.
+* Running blockbattles.exe installs poland.pyw on your computer and runs it.
+* Polish-Cow-Virus is a prankware, **not** some super dangerous malware that steals your passwords.
+* If you're having trouble getting rid of it, run the command in cmd prompt:
+  
+> taskkill /F /IM python.exe & taskkill /F /IM pythonw.exe
+
 ## Disclaimer
 
 This project is made for educational and entertainment purposes only.
